@@ -13,7 +13,7 @@ const reader = module.exports = (paths, callback) => { // eslint-disable-line
       if (err2) return callback(err2);
       return fs.readFile(filePath3, (err3, data3) => {
         if (err3) return callback(err3);
-        callback(null, data1.toString(), data2.toString(), data3.toString());
+        callback(null, [data1.toString(), data2.toString(), data3.toString()]);
         return undefined;
       });
     });

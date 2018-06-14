@@ -19,10 +19,10 @@ describe('#READER: file reader module that reads exactly tree files', () => {
 
   test('#READER: returns the mock data in the correct order', () => {
     const testPaths = [mockText1, mockText2, mockText3];
-    reader(testPaths, (err, data1, data2, data3) => {
-      expect(data1).toEqual(mockData[0]);
-      expect(data2).toEqual(mockData[1]);
-      expect(data3).toEqual(mockData[2]);
+    reader(testPaths, (err, data) => {
+      expect(data[0]).toEqual(mockData[0]);
+      expect(data[1]).toEqual(mockData[1]);
+      expect(data[2]).toEqual(mockData[2]);
       expect(err).toBeNull();
     });
   });
