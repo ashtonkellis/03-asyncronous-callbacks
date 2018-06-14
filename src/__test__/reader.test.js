@@ -23,16 +23,31 @@ describe('#READER: file reader module that reads exactly tree files', () => {
       expect(data1).toEqual(mockData[0]);
       expect(data2).toEqual(mockData[1]);
       expect(data3).toEqual(mockData[2]);
+      expect(err).toBeNull();
+    });
+  });
+
+  test('#READER: throws an error on bad path at position 1', () => {
+    const testPaths = ['bad path', mockText2, mockText3];
+    reader(testPaths, (err) => {
+      expect(err).toHaveProperty('errno');
+      expect(err.code).toEqual('ENOENT');
+    });
+  });
+
+  test('#READER: throws an error on bad path at position 2', () => {
+    const testPaths = [mockText1, 'bad path', mockText3];
+    reader(testPaths, (err) => {
+      expect(err).toHaveProperty('errno');
+      expect(err.code).toEqual('ENOENT');
+    });
+  });
+
+  test('#READER: throws an error on bad path at position 3', () => {
+    const testPaths = [mockText1, mockText2, 'bad path'];
+    reader(testPaths, (err) => {
+      expect(err).toHaveProperty('errno');
+      expect(err.code).toEqual('ENOENT');
     });
   });
 });
-
-// Testing
-// File Reader Module Tests
-// Use describe and it (or test) methods to define descriptive tests and increase readability
-// Each it callback should aim to test a small, well defined, feature of a function
-// Write tests to ensure that the reader function rejects errors with invalid file paths
-// Write tests to ensure that the reader function correctly resolves mapped string data for an array of file paths
-// Feature Tasks
-// File Reader Module
-// In the lib/ directory create a reader.js module that exports a single function. The reader module should take an array of three file paths and resolve a mapped array of strings loaded from each file using an error-first callback. The string data should be in the same order as the file path data (mapped). If an error occurs, it should immediately reject the error using the callback and stop execution.
