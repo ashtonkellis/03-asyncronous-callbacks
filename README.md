@@ -1,48 +1,33 @@
-![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) 03: Asynchronous Callbacks
-===
+# Lab 03 - Asynchronous Callbacks
 
-## Submission Instructions
-* Work in a fork of this repository
-* Work in a branch called `lab-03` on your fork
-* Open a pull request to your forked repository
-* Set up Travis CI on your forked repository to enable continuous integration
-* Submit on canvas a question and observation, how long you spent, and a link to your pull request
+[![Build Status](https://travis-ci.org/ashtonkellis/02-Lists-From-Scratch.svg?branch=master)](https://travis-ci.org/ashtonkellis/02-Lists-From-Scratch)
 
-## Resources
-* [fs module docs](https://nodejs.org/api/fs.html)
+## List Module
+### new List ()
+- description: creates a new list, with similar behavior to an array. each element in the list has an index that can be used to reference it. 
+- arity: 0
 
-## Configuration
-Configure the root of your repository with the following files and directories. Thoughfully name and organize any aditional configuration or module files.
-* **README.md** - contains documentation
-* **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file
-* **.eslintrc.json** - contains the course linter configuratoin
-* **.eslintignore** - contains the course linter ignore configuration
-* **.travis.yml** - contains your travis testing instructions
-* **package.json** - contains npm package config 
-  * jest and eslint must be dependencies
-  * create a `lint` script for running eslint `"lint": "eslint **/.js"`
-  * create a `test` script for running tests
-* **lib/** - contains module definitions
-* **data/** - contains the text files used by the program
-* **\_\_test\_\_/** - contains unit tests
+### list.push(..args)
+- description: adds arguments to the end of the list
+- arity: 1+ comma separated arguments
+- argument data type: any
 
-## Testing
-##### File Reader Module Tests
-* Use `describe` and `it` (or `test`) methods to define descriptive tests and increase readability
-* Each `it` callback should aim to test a small, well defined, feature of a function
-* Write tests to ensure that the reader function rejects errors with invalid file paths
-* Write tests to ensure that the reader function correctly resolves mapped string data for an array of file paths
+### list.map(callback)
+- description: convers an n-length list to an n-length copy of the list, with each element mutated in the way defined by the callback function
+- arity: 1
+- argument data type: a callback function
+- throws an error if list is empty, or callback is not a function
 
-## Feature Tasks
-##### File Reader Module
-In the lib/ directory create a `reader.js` module that exports a single function. The reader module should take an array of three file paths and resolve a mapped array of strings loaded from each file using an error-first callback. The string data should be in the same order as the file path data (mapped). If an error occurs, it should immediately reject the error using the callback and stop execution.
+### list.reduce(callback, accumulator)
+- description: converts an n-length list into a single element, based on the provided callback function and accumulator
+- arity: 2
+- argument data types:
+  - callback: a callback function used to reduce the array. This callback takes two arguments (accumulator & current).
+  - accumulator: the initial accumulator. If omitted, the first element in the array will be used.
+  - throws an error if list is empty, or callback is not a function
 
-* The file reader module should have the function signature `(paths, callback) => undefined`
-* On failure, the file reader module should invoke the callback with an error `callback(error)`
-* On success, the file reader module should invoke the callback with `null` as the first parameter and the result as the second parameter - `callback(null, result)`
-
-##### Stretch
-Write the file reader function recursively so that it will be able to support 0 or more paths.
-
-##  Documentation
-Add your Travis CI build badge to the top of your README.md. Describe the exported values of each module you have defined. Every function description should include it's arity (expected number of parameters), the expected data for each paramiter (data-type and limitations), and it's behavior (for both valid and invalued use). Feel free to write any additional information in your README.md.
+### list.forEach(callback)
+- description: applies the provided callback function to each element in the list
+- arity: 1
+= argument data type: callback funciton to be applied to each element
+- throws an error if list is empty, or callback is not a function

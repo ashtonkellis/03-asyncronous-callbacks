@@ -1,5 +1,5 @@
 'use strict';
 
-const fake = module.exports = () => {
+const fake = module.exports = () => { // eslint-disable-line
   return 'working';
 };
